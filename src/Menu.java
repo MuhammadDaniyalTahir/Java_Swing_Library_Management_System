@@ -1,12 +1,13 @@
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+
 
 public class Menu extends JFrame {
     private JButton hotPicksBtn;
@@ -49,13 +50,42 @@ public class Menu extends JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //
+        //Adding ActionListeners to each button.
         this.hotPicksBtn.addActionListener(new HotPicksActionListener());
+        this.BorrowItemBtn.addActionListener(new BorrowItemActionListener()); //Not Implemented yet.
+        this.viewItemsByIDBtn.addActionListener(new viewItemsByIDActionListener());
+        this.deleteItemBtn.addActionListener(new DeleteItemActionListener());
     }
     private class HotPicksActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            try{
+                HotPicksFrame frame = new HotPicksFrame(); //Goes to another class to open a new frame.
+            }
+            catch (IOException e){
+                System.out.println("IOException in Hot picks frame in menu class");
+            }
+        }
+    }
+    private class BorrowItemActionListener implements ActionListener{ //Not Implemented Yet.
         public void actionPerformed(ActionEvent ae){
+           // BorrowItemFrame frame = new BorrowItemFrame(); //Not made it's class yet.
 
+        }
+    }
+    private class viewItemsByIDActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            try{
+                ViewItemByIDFrame frame = new  ViewItemByIDFrame();
+            }
+            catch (IOException e){
 
+            }
+        }
+    }
+    private class DeleteItemActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent ae){
 
         }
     }
