@@ -1,6 +1,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 class Newspaper extends Item {
     private String publisher;
@@ -64,10 +65,8 @@ class Newspaper extends Item {
         this.isBorrowed = !this.isBorrowed;
     }
     @Override
-    void showBorrowers(){
-        for(Borrower b : borrowers){
-            System.out.println(b.getName());
-        }
+    List<Borrower> getBorrowers(){
+        return this.borrowers;
     }
     @Override
     int getPopularityCount(){

@@ -99,10 +99,8 @@ class Magazine extends Item{
         this.isBorrowed = !this.isBorrowed;
     }
     @Override
-    void showBorrowers(){
-        for(Borrower b : borrowers){
-            System.out.println(b.getName());
-        }
+    List<Borrower> getBorrowers(){
+        return this.borrowers;
     }
     @Override
     int getPopularityCount(){

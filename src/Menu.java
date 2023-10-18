@@ -21,6 +21,11 @@ public class Menu extends JFrame {
     private JButton exitBtn;
 
     public Menu(){
+        Library lib = null;
+        try{
+            lib = new Library();
+        }
+        catch(IOException e){}
           //To load all the data from file.
         //Initializing all buttons.
         this.hotPicksBtn = new JButton("Hot Picks!");
@@ -55,6 +60,7 @@ public class Menu extends JFrame {
         this.BorrowItemBtn.addActionListener(new BorrowItemActionListener()); //Not Implemented yet.
         this.viewItemsByIDBtn.addActionListener(new viewItemsByIDActionListener());
         this.deleteItemBtn.addActionListener(new DeleteItemActionListener());
+        this.viewBorrowersListBtn.addActionListener(new ViewBorrowersListActionListener(lib));
     }
     private class HotPicksActionListener implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
@@ -86,6 +92,17 @@ public class Menu extends JFrame {
     private class DeleteItemActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ae){
+            DeleteItemFrame frame = new DeleteItemFrame();
+        }
+    }
+    private class ViewBorrowersListActionListener implements ActionListener{
+        private Library library;
+        public ViewBorrowersListActionListener(Library lib){
+            this.library = lib;
+        }
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            ViewBorrowersListFrame frame = new ViewBorrowersListFrame(library);
 
         }
     }

@@ -78,10 +78,8 @@ public class Book extends Item{
         this.cost = cost;
     }
     @Override
-    void showBorrowers(){
-        for(Borrower b : borrowers){
-            System.out.println(b.getName());
-        }
+    List<Borrower> getBorrowers(){
+        return this.borrowers;
     }
     @Override
     int getPopularityCount(){

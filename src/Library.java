@@ -370,18 +370,23 @@ public class Library {
         }
     }
 
-    void deleteItem(final int id) throws IOException{
+    boolean deleteItem(final int id) throws IOException{
+        boolean flag = false;
         for(Item i : items){
             if(i.getId() == id){
                 items.remove(i);
+                flag = true;
                 break;
             }
         }
+        if(flag == false)
+            return flag;
         FileWriter fw = new FileWriter("data.txt");
         fw.close();
         for(Item i : items){
             i.writeToFile();
         }
+        return flag;
     }
 
     void displayAllItems(){
@@ -401,16 +406,14 @@ public class Library {
         return it;
     }
 
-    void viewBorrowersList(){
-        for(int i = 0; i < items.size(); i++){
-            if(items.get(i).isBorrowed()){
-                items.get(i).displayInfo();
-                System.out.print("Above item has borrower: ");
-                items.get(i).showBorrowers();
-            }
-
-        }
-    }
+//    void viewBorrowersList(){
+//        for(int i = 0; i < items.size(); i++){
+//            if(items.get(i).isBorrowed()){
+//                items.get(i).displayInfo();//item
+//                //items.get(i).showBorrowers(); // it's borrower
+//            }
+//        }
+//    }
 
     void borrowItem(){
         Scanner sc = new Scanner(System.in);
@@ -464,5 +467,8 @@ public class Library {
         Comparator<Item> ageComparator = (s1, s2) -> Integer.compare(s1.getPopularityCount(), s2.getPopularityCount());
         Collections.sort(itemsList, ageComparator);
         return itemsList;
+    }
+    List<Item> getItems(){
+        return this.items;
     }
 }

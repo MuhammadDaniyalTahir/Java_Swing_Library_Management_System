@@ -13,7 +13,7 @@ abstract class Item implements Configuration {
     protected List<Borrower> borrowers;
 
     abstract int getPopularityCount();
-    abstract void showBorrowers();
+    abstract List<Borrower> getBorrowers();
     abstract void changeBorrowStatus();
     abstract boolean isBorrowed();
     abstract void addBorrower(Borrower b);
