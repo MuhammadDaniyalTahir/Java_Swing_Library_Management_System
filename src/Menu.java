@@ -54,45 +54,55 @@ public class Menu extends JFrame {
         this.setSize(400, 400);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
 
         //Adding ActionListeners to each button.
-        this.hotPicksBtn.addActionListener(new HotPicksActionListener());
-        this.BorrowItemBtn.addActionListener(new BorrowItemActionListener()); //Not Implemented yet.
-        this.viewItemsByIDBtn.addActionListener(new viewItemsByIDActionListener());
-        this.deleteItemBtn.addActionListener(new DeleteItemActionListener());
+        this.hotPicksBtn.addActionListener(new HotPicksActionListener(lib));
+        this.BorrowItemBtn.addActionListener(new BorrowItemActionListener(lib));
+        this.viewItemsByIDBtn.addActionListener(new viewItemsByIDActionListener(lib));
+        this.deleteItemBtn.addActionListener(new DeleteItemActionListener(lib));
         this.viewBorrowersListBtn.addActionListener(new ViewBorrowersListActionListener(lib));
+        this.viewAllItemsBtn.addActionListener(new ViewAllItemActionsListener(lib));
     }
     private class HotPicksActionListener implements ActionListener {
+        private Library library;
+        public HotPicksActionListener(final Library lib){
+            this.library = lib;
+        }
+
         public void actionPerformed(ActionEvent ae) {
-            try{
-                HotPicksFrame frame = new HotPicksFrame(); //Goes to another class to open a new frame.
-            }
-            catch (IOException e){
-                System.out.println("IOException in Hot picks frame in menu class");
-            }
+            HotPicksFrame frame = new HotPicksFrame(library); //Goes to another class to open a new frame.
         }
     }
-    private class BorrowItemActionListener implements ActionListener{ //Not Implemented Yet.
+    private class BorrowItemActionListener implements ActionListener{
+        private Library library;
+        public BorrowItemActionListener(final Library lib){
+            this.library = lib;
+        }
         public void actionPerformed(ActionEvent ae){
-           // BorrowItemFrame frame = new BorrowItemFrame(); //Not made it's class yet.
+            BorrowItemFrame frame = new BorrowItemFrame(library);
 
         }
     }
     private class viewItemsByIDActionListener implements ActionListener {
+        private Library library;
+        public viewItemsByIDActionListener(final Library lib){
+            this.library = lib;
+        }
         @Override
         public void actionPerformed(ActionEvent ae){
-            try{
-                ViewItemByIDFrame frame = new  ViewItemByIDFrame();
-            }
-            catch (IOException e){
+            ViewItemByIDFrame frame = new  ViewItemByIDFrame(library);
 
-            }
         }
     }
     private class DeleteItemActionListener implements ActionListener {
+        private Library library;
+        public DeleteItemActionListener(final Library lib){
+            this.library = lib;
+        }
         @Override
         public void actionPerformed(ActionEvent ae){
-            DeleteItemFrame frame = new DeleteItemFrame();
+            DeleteItemFrame frame = new DeleteItemFrame(library);
         }
     }
     private class ViewBorrowersListActionListener implements ActionListener{
@@ -103,6 +113,17 @@ public class Menu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent ae){
             ViewBorrowersListFrame frame = new ViewBorrowersListFrame(library);
+
+        }
+    }
+    private class ViewAllItemActionsListener implements ActionListener{
+        private Library library;
+        public ViewAllItemActionsListener(Library lib){
+            this.library = lib;
+        }
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            ViewAllItemsFrame frame = new ViewAllItemsFrame(library);
 
         }
     }
