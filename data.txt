@@ -1,0 +1,12 @@
+1,title1,Book1_Author,2010,4,4159.780352
+1,Book2_title,Book2_Author,2011,3,4202.778521599999
+2,magazine_titl,magazine1_author1,magazine1_author2.,magazine1_publisher,2,0.0
+3,newspaper4_title,newPublisher4,4,2023-09-23
+2,magazine2_title,author2,authorAnother.,publisher2,4,110.0
+2,magazine3_title,author3..,publisher3,3,90.0
+3,newspaper3_title,publisher3,2,2023-09-23
+1,Book4_title,author4,2014,4,130.0
+3,newspaper4_title,publisher4,3,2023-09-23
+1,MY_Book,my_author,2010,1,180.0
+2,my_magazine,magazineAuthor,magazineAuthor2.,magazine_Publisher,1,187.0
+3,NewspaperTitle,publisherNewspaper,3,2023-10-21
