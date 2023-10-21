@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
@@ -9,9 +10,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class HotPicksFrame extends JFrame {
-    public HotPicksFrame()throws IOException{
-
-        Library lib = new Library();
+    private static int hoveredRow = -1;
+    private Library lib;
+    public HotPicksFrame(final Library lib){
         List<Item> items = lib.getHotPicks();
         DefaultTableModel model = new DefaultTableModel(); //Making dynamic table model.
         model.addColumn("Item");
@@ -30,6 +31,49 @@ public class HotPicksFrame extends JFrame {
                 return column == 8 ? JButton.class : Object.class; // Set column 8 to render buttons
             }
         };
+        //Following code to add mouse hovering in the table.
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                hoveredRow = -1;
+                table.repaint();
+            }
+        });
+
+        table.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                Point point = e.getPoint();
+                int row = table.rowAtPoint(point);
+
+                if (row != hoveredRow) {
+                    hoveredRow = row;
+                    table.repaint();
+                }
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                // Not used in this example
+            }
+        });
+        table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                                                           boolean isSelected, boolean hasFocus,
+                                                           int row, int column) {
+                Component component = super.getTableCellRendererComponent(table, value,
+                        isSelected, hasFocus, row, column);
+
+                if (row == hoveredRow) {
+                    component.setBackground(Color.gray);
+                } else {
+                    component.setBackground(table.getBackground());
+                }
+
+                return component;
+            }
+        });
 
         for(Item i : items){
             if(i.getTypeId() == 1){ // now add data if item is book.
@@ -67,7 +111,9 @@ public class HotPicksFrame extends JFrame {
 //                    }
 //                }
 //        );
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
 
         JButton back = new JButton("Back");
@@ -84,7 +130,7 @@ public class HotPicksFrame extends JFrame {
         this.add(scrollPane, BorderLayout.CENTER);
         this.add(p1, BorderLayout.SOUTH);
 
-        this.setSize(1000, 500);
+        this.setSize(1000, 200);
         this.setVisible(true);
 
     }

@@ -415,48 +415,9 @@ public class Library {
 //        }
 //    }
 
-    void borrowItem(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("All items are shown below");
-        for(Item i : items){
-            i.displayInfo();
-        }
-        int id = 0;
-        boolean flag = false;
-        do{
-            System.out.print("Enter id of item you want to borrow");
-            System.out.println("OtherWise enter 0");
-            id = sc.nextInt();
-            sc.nextLine();
-
-            if(id != 0){
-                for(Item i : items){
-                    if(i.getId() == id){
-                        if(i.isBorrowed()){
-                            System.out.println("Item is not available");
-                            flag = true;
-                        }
-                        break;
-                    }
-                }
-            }
-            else{
-                return;
-            }
-        }while(flag);
-
-        System.out.print("Enter borrower name: ");
-        Borrower b = new Borrower(sc.nextLine());
-
-        for(Item i : items){
-            if(i.getId() == id){
-                System.out.println("Cost of item is: " + i.calculateCost());
-                i.addBorrower(b);
-                i.changeBorrowStatus();
-                break;
-            }
-        }
-        System.out.println("Item has been borrowed Successfully");
+    void borrowItem(final Item it, final Borrower b){
+        it.addBorrower(b);
+        it.changeBorrowStatus();
     }
 
     public List<Item> getHotPicks() {
@@ -470,5 +431,8 @@ public class Library {
     }
     List<Item> getItems(){
         return this.items;
+    }
+    public int countItems() {
+        return items.size();
     }
 }

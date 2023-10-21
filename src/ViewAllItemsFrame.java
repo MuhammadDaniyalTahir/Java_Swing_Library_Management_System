@@ -105,6 +105,7 @@ public class ViewAllItemsFrame extends JFrame {
 //                }
 //        );
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
 
         JButton back = new JButton("Back");

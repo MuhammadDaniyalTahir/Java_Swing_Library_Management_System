@@ -14,7 +14,7 @@ class Newspaper extends Item {
         this.date = date;
         this.popularityCount = popularityCount;
         this.publisher = publisherCompany;
-        id = Id++;
+        this.id = Id++;
         this.typeId = 3;
         this.isBorrowed = false;
         this.borrowers = new ArrayList<Borrower>();
