@@ -78,6 +78,8 @@ public class AddNewspaperDialog extends JDialog {
     }
     private void addNewspaper(){
         String[] data = {inputTitle.getText(), inputPublisher.getText()};
+        for(int i = 0; i < data.length; i++)
+            data[i] = data[i].trim();
         try{
             lib.addItem(3, data);
         }

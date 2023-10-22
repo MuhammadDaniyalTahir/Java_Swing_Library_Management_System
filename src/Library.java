@@ -223,20 +223,20 @@ public class Library {
         i.displayInfo();
     }
 
-    void editItem(final int id)throws IOException{
+    void editItem(final int id, final String[] data)throws IOException{
         for(Item i : items){
             if(i.getId() == id){
 
                 if(i.getTypeId() == 1){
-                    this.editBook(i);
+                    this.editBook(i, data);
                     break;
                 }
                 else if(i.getTypeId() == 2){
-                    this.editMagazine(i);
+                    this.editMagazine(i, data);
                     break;
                 }
                 else if(i.getTypeId() == 3){
-                    this.editNewspaper(i);
+                    this.editNewspaper(i, data);
                     break;
                 }
             }
@@ -248,86 +248,28 @@ public class Library {
         }
     }
 
-    void editBook(Item i){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("1: For edit Book author");
-        System.out.println("2: For edit Book title");
-        System.out.println("3: For edit book published year");
-        System.out.println("4: For edit Book cost");
-        int choice = sc.nextInt();
-        if(choice == 1){
-            sc.nextLine();
-            System.out.print("Enter author: ");
-            i.setAuthor(sc.nextLine());
-        }
-        else if(choice == 2){
-            sc.nextLine();
-            System.out.print("Enter title: ");
-            i.setTitle(sc.nextLine());
-        }
-        else if(choice == 3){
-            System.out.print("Enter published Year: ");
-            i.setYear(sc.nextInt());
-        }
-        else if(choice == 4){
-            System.out.print("Enter cost: ");
-            i.setCost(sc.nextDouble());
-        }
+    void editBook(Item i,  final String[] data){
+        i.setTitle(data[0]);
+        i.setAuthor(data[1]);
+        i.setYear(Integer.parseInt(data[2]));
+        i.setCost(Double.parseDouble(data[3]));
     }
 
-    void editMagazine(Item i){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("1: For edit Magazine author");
-        System.out.println("2: For edit Magazine title");
-        System.out.println("3: For edit Magazine publisher company");
-        System.out.println("4: For edit Magazine cost");
-        int choice = sc.nextInt();
-        if(choice == 1){
-            sc.nextLine();
+    void editMagazine(Item i, final String[] data){
+        String[] authorStr = data[1].split(",");
+        List<String> authors = new ArrayList<>();
+        for(String s : authorStr)
+            authors.add(s);
 
-            List authors = new ArrayList<String>();
-            int option = 0;
-            do{
-                System.out.println("Enter the name of author: ");
-                authors.add(sc.nextLine());
-                System.out.println("Is there another author of the magazine");
-                System.out.println("1: yes");
-                System.out.println("2: No");
-                option = sc.nextInt();
-                sc.nextLine();
-            }while(option == 1);
-            i.setAuthor(authors);
-        }
-        else if(choice == 2){
-            sc.nextLine();
-            System.out.print("Enter title: ");
-            i.setTitle(sc.nextLine());
-        }
-        else if(choice == 3){
-            sc.nextLine();
-            System.out.print("Enter publisher company: ");
-            i.setPublisher(sc.nextLine());
-        }
-        else if(choice == 4){
-            System.out.print("Enter cost: ");
-            i.setCost(sc.nextDouble());
-        }
+        i.setTitle(data[0]);
+        i.setAuthor(authors);
+        i.setPublisher(data[2]);
+        i.setCost(Double.parseDouble(data[3]));
+
     }
-    void editNewspaper(Item i){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("1: For edit Magazine title");
-        System.out.println("2: For edit Magazine publisher company");
-        int choice = sc.nextInt();
-        if(choice == 1){
-            sc.nextLine();
-            System.out.print("Enter title: ");
-            i.setTitle(sc.nextLine());
-        }
-        else if(choice == 2){
-            sc.nextLine();
-            System.out.print("Enter publisher company name: ");
-            i.setPublisher(sc.nextLine());
-        }
+    void editNewspaper(Item i, final String[] data){
+            i.setTitle(data[0]);
+            i.setPublisher(data[1]);
     }
 
     boolean deleteItem(final int id) throws IOException{

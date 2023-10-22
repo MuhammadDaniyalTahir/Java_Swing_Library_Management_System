@@ -15,6 +15,7 @@ public class AddBookDialog extends JDialog {
         this.setVisible(true);
         this.setLayout(new GridLayout(5, 1));
         this.setLocationRelativeTo(null);
+        this.setTitle("ADD Book Details");
 
         //Making all labels that we need in this dialog box.
         titleLabel = new JLabel("Enter Title");
@@ -95,6 +96,8 @@ public class AddBookDialog extends JDialog {
     }
     private void addBook(){
         String[] data = {inputTitle.getText(), inputAuthor.getText(), inputYear.getText(), inputCost.getText()};
+        for(int i = 0; i < data.length; i++)
+            data[i] = data[i].trim();
         try{
             lib.addItem(1, data);
         }

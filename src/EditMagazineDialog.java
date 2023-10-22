@@ -4,23 +4,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class AddMagazineDialog extends JDialog {
+public class EditMagazineDialog extends JDialog {
     private Library lib;
-    JLabel titleLabel, costLabel, authorLabel, publisherLabel;
-    JTextField inputTitle, inputAuthor, inputPublisher, inputCost;
+    private int magazineID;
+    private JLabel titleLabel, costLabel, authorLabel, publisherLabel;
+    private JLabel msgLabel;
+    private JTextField inputTitle, inputAuthor, inputPublisher, inputCost;
 
-    public AddMagazineDialog(final Library lib){
+
+    public EditMagazineDialog(final Library lib, final int id, JLabel msgLabel){
+        this.msgLabel = msgLabel;
         this.lib =  lib;
+        this.magazineID = id;
         this.setSize(300, 300);
         this.setVisible(true);
         this.setLayout(new GridLayout(5, 1));
         this.setLocationRelativeTo(null);
-        this.setTitle("ADD Magazine Details");
 
         //Making all labels that we need in this dialog box.
         titleLabel = new JLabel("Enter Title");
         authorLabel = new JLabel("Enter Author(s)");
-        publisherLabel = new JLabel("Enter Pubisher");
+        publisherLabel = new JLabel("Enter Publisher");
         costLabel = new JLabel("Enter Cost");
 
         //Making all textFiels to take input that we need in this dialog box.
@@ -35,13 +39,13 @@ public class AddMagazineDialog extends JDialog {
         titlePanel.add(inputTitle);
         this.add(titlePanel);
 
-        //Making panel to add label and input field for author.
+        //Making panel to add label and input field for author(s).
         JPanel authorPanel = new JPanel(new FlowLayout());
         authorPanel.add(authorLabel);
         authorPanel.add(inputAuthor);
         this.add(authorPanel);
 
-        //Making panel to add label and input field for Publisher.
+        //Making panel to add label and input field for publisher.
         JPanel yearPanel = new JPanel(new FlowLayout());
         yearPanel.add(publisherLabel);
         yearPanel.add(inputPublisher);
@@ -53,14 +57,14 @@ public class AddMagazineDialog extends JDialog {
         costPanel.add(inputCost);
         this.add(costPanel);
 
-        ////Making panel to add Button to add Magazine according to above given data.
-        JPanel addBtnPanel = new JPanel(new FlowLayout());
-        JButton addBtn = new JButton("Add");
-        addBtnPanel.add(addBtn);
-        this.add(addBtnPanel);
+        ////Making panel to add Button to Edit Magazine according to above given data.
+        JPanel editBtnPanel = new JPanel(new FlowLayout());
+        JButton editBtn = new JButton("Edit");
+        editBtnPanel.add(editBtn);
+        this.add(editBtnPanel);
 
         //Add button click action is defined now.
-        addBtn.addActionListener(new ActionListener() {
+        editBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(inputTitle.getText().isEmpty() || inputAuthor.getText().isEmpty() || inputPublisher.getText().isEmpty()
@@ -68,8 +72,8 @@ public class AddMagazineDialog extends JDialog {
                     errorMsgDialog();
                 }
                 else{
-                    addMagazine();
-                    AddMagazineDialog.this.dispose();
+                    editMagazine();
+                    EditMagazineDialog.this.dispose();
                 }
             }
         });
@@ -94,15 +98,17 @@ public class AddMagazineDialog extends JDialog {
         errorMsgDialog.setSize(200,200);
         errorMsgDialog.setLocationRelativeTo(null);
     }
-    private void addMagazine(){
+    private void editMagazine(){
         String[] data = {inputTitle.getText(), inputAuthor.getText(), inputPublisher.getText(), inputCost.getText()};
         for(int i = 0; i < data.length; i++)
             data[i] = data[i].trim();
         try{
-            lib.addItem(2, data);
+            lib.editItem(this.magazineID, data);
         }
         catch(IOException e){
 
         }
+        msgLabel.setText("Magazine has been edited successfully");
+
     }
 }

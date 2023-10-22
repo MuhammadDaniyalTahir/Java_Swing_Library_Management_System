@@ -64,6 +64,13 @@ public class Menu extends JFrame {
         this.viewBorrowersListBtn.addActionListener(new ViewBorrowersListActionListener(lib));
         this.viewAllItemsBtn.addActionListener(new ViewAllItemActionsListener(lib));
         this.addItemBtn.addActionListener(new AddItemActionListener(lib));
+        this.editItemBtn.addActionListener(new EditItemActionListener(lib));
+        this.exitBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
     private class HotPicksActionListener implements ActionListener {
         private Library library;
@@ -136,6 +143,16 @@ public class Menu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent ae){
             AddItemFrame frame = new AddItemFrame(this.lib);
+        }
+    }
+    private class EditItemActionListener implements ActionListener{
+        private Library lib;
+        public EditItemActionListener(final Library lib){
+            this.lib = lib;
+        }
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            EditItemFrame frame = new EditItemFrame(this.lib);
         }
     }
 

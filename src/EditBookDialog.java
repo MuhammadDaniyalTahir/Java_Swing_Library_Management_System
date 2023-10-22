@@ -4,29 +4,32 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class AddMagazineDialog extends JDialog {
+public class EditBookDialog extends JDialog {
     private Library lib;
-    JLabel titleLabel, costLabel, authorLabel, publisherLabel;
-    JTextField inputTitle, inputAuthor, inputPublisher, inputCost;
+    private int bookID;
+    private JLabel titleLabel, costLabel, authorLabel, yearLabel;
+    private JLabel msgLabel;
+    private JTextField inputTitle, inputAuthor, inputYear, inputCost;
 
-    public AddMagazineDialog(final Library lib){
+    public EditBookDialog(final Library lib, final int id, JLabel msgLabel){
+        this.msgLabel = msgLabel;
         this.lib =  lib;
+        this.bookID = id;
         this.setSize(300, 300);
         this.setVisible(true);
         this.setLayout(new GridLayout(5, 1));
         this.setLocationRelativeTo(null);
-        this.setTitle("ADD Magazine Details");
 
         //Making all labels that we need in this dialog box.
         titleLabel = new JLabel("Enter Title");
-        authorLabel = new JLabel("Enter Author(s)");
-        publisherLabel = new JLabel("Enter Pubisher");
+        authorLabel = new JLabel("Enter Author");
+        yearLabel = new JLabel("Enter Year");
         costLabel = new JLabel("Enter Cost");
 
         //Making all textFiels to take input that we need in this dialog box.
         inputTitle = new JTextField(10);
         inputAuthor = new JTextField(10);
-        inputPublisher = new JTextField(10);
+        inputYear = new JTextField(10);
         inputCost = new JTextField(10);
 
         //Making panel to add label and input field for title.
@@ -41,10 +44,10 @@ public class AddMagazineDialog extends JDialog {
         authorPanel.add(inputAuthor);
         this.add(authorPanel);
 
-        //Making panel to add label and input field for Publisher.
+        //Making panel to add label and input field for year.
         JPanel yearPanel = new JPanel(new FlowLayout());
-        yearPanel.add(publisherLabel);
-        yearPanel.add(inputPublisher);
+        yearPanel.add(yearLabel);
+        yearPanel.add(inputYear);
         this.add(yearPanel);
 
         //Making panel to add label and input field for cost.
@@ -53,23 +56,23 @@ public class AddMagazineDialog extends JDialog {
         costPanel.add(inputCost);
         this.add(costPanel);
 
-        ////Making panel to add Button to add Magazine according to above given data.
-        JPanel addBtnPanel = new JPanel(new FlowLayout());
-        JButton addBtn = new JButton("Add");
-        addBtnPanel.add(addBtn);
-        this.add(addBtnPanel);
+        ////Making panel to add Button to Edit book according to above given data.
+        JPanel editBtnPanel = new JPanel(new FlowLayout());
+        JButton editBtn = new JButton("Edit");
+        editBtnPanel.add(editBtn);
+        this.add(editBtnPanel);
 
         //Add button click action is defined now.
-        addBtn.addActionListener(new ActionListener() {
+        editBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(inputTitle.getText().isEmpty() || inputAuthor.getText().isEmpty() || inputPublisher.getText().isEmpty()
+                if(inputTitle.getText().isEmpty() || inputAuthor.getText().isEmpty() || inputYear.getText().isEmpty()
                         || inputCost.getText().isEmpty()){
                     errorMsgDialog();
                 }
                 else{
-                    addMagazine();
-                    AddMagazineDialog.this.dispose();
+                    editBook();
+                    EditBookDialog.this.dispose();
                 }
             }
         });
@@ -94,15 +97,16 @@ public class AddMagazineDialog extends JDialog {
         errorMsgDialog.setSize(200,200);
         errorMsgDialog.setLocationRelativeTo(null);
     }
-    private void addMagazine(){
-        String[] data = {inputTitle.getText(), inputAuthor.getText(), inputPublisher.getText(), inputCost.getText()};
+    private void editBook(){
+        String[] data = {inputTitle.getText(), inputAuthor.getText(), inputYear.getText(), inputCost.getText()};
         for(int i = 0; i < data.length; i++)
             data[i] = data[i].trim();
         try{
-            lib.addItem(2, data);
+            lib.editItem(this.bookID, data);
         }
         catch(IOException e){
 
         }
+        msgLabel.setText("Book has been edited successfully");
     }
 }
