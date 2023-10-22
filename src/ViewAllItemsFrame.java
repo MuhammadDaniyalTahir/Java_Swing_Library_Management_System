@@ -95,7 +95,7 @@ public class ViewAllItemsFrame extends JFrame {
         table.getColumnModel().getColumn(8).setCellEditor(new ButtonEditor());
 
         JScrollPane scrollPane = new JScrollPane(table);
-        this.setTitle("HotPicksItems");
+        this.setTitle("View All Items");
 //        this.addWindowListener(    //Code to close the JFrame.
 //                new WindowAdapter() {
 //                    @Override
@@ -105,7 +105,7 @@ public class ViewAllItemsFrame extends JFrame {
 //                }
 //        );
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+
         this.setLayout(new BorderLayout());
 
         JButton back = new JButton("Back");
@@ -124,6 +124,7 @@ public class ViewAllItemsFrame extends JFrame {
 
         this.setSize(1000, 500);
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
 
     }
 
@@ -139,4 +140,3 @@ public class ViewAllItemsFrame extends JFrame {
         return button;
     }
 }
-

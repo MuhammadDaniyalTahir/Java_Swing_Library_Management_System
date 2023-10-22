@@ -116,6 +116,7 @@ public class HotPicksFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
 
+
         JButton back = new JButton("Back");
         back.addActionListener(
                 new ActionListener() {
@@ -130,8 +131,9 @@ public class HotPicksFrame extends JFrame {
         this.add(scrollPane, BorderLayout.CENTER);
         this.add(p1, BorderLayout.SOUTH);
 
-        this.setSize(1000, 200);
+        this.setSize(1000, 500);
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
 
     }
     private static JButton createButton() {
@@ -159,34 +161,6 @@ class ButtonRenderer extends JButton implements TableCellRenderer {
     }
 }
 
-// Custom editor for JButton
-//class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
-//    private JButton button;
-//
-//    public ButtonEditor() {
-//        button = new JButton();
-//        button.setOpaque(true);
-//        button.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                fireEditingStopped();
-//                //JOptionPane.showMessageDialog(null, "Button Editor!");
-//                System.out.println("Editor");
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-//        return button;
-//    }
-//
-//    @Override
-//    public Object getCellEditorValue() {
-//        return button;
-//    }
-//}
-//
 class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
     private JButton button;
     private String originalText;
@@ -219,4 +193,3 @@ class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
         return button;
     }
 }
-

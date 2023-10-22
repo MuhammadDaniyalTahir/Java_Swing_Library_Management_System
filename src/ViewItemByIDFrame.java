@@ -14,9 +14,10 @@ public class ViewItemByIDFrame extends JFrame {
         this.lib = lib;
         model = new DefaultTableModel();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+        this.setTitle("View Item By ID");
 
-        this.setSize(500, 300);
+        this.setSize(500, 500);
+        this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
 
         JPanel textPanel = new JPanel(new FlowLayout());

@@ -58,12 +58,6 @@ public class EditItemFrame extends JFrame {
 
         this.add(backBtnPanel, BorderLayout.SOUTH);
         this.add(mainPanel, BorderLayout.CENTER);
-
-
-
-
-
-
     }
     private void editItemBtnFunction(){
         int id = Integer.parseInt(this.inputID.getText());

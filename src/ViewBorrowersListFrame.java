@@ -16,6 +16,8 @@ public class ViewBorrowersListFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setSize(1000, 500);
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
+
         JTable table = new JTable(model);
         this.add(new JScrollPane(table), BorderLayout.CENTER);
         JButton backBtn = new JButton("Back");
@@ -108,7 +110,5 @@ public class ViewBorrowersListFrame extends JFrame {
                 }
             }
         }
-//        this.pack();
-//        this.setLocationRelativeTo(null);
     }
 }

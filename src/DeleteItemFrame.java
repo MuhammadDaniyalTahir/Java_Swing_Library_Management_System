@@ -11,10 +11,9 @@ public class DeleteItemFrame extends JFrame {
     private JTable table = null;
     public DeleteItemFrame(final Library lib){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-
         this.setSize(500, 300);
         this.setLayout(new BorderLayout());
+        this.setTitle("Delete Item By ID");
 
         JPanel textPanel = new JPanel(new FlowLayout());
 
@@ -23,13 +22,24 @@ public class DeleteItemFrame extends JFrame {
         textPanel.add(IDLabel);
         textPanel.add(t1);
         this.add(textPanel, BorderLayout.NORTH);
-
+        JButton back = new JButton("Back");
+        back.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        dispose();
+                    }
+                }
+        );
+        JPanel p1 = new JPanel(new FlowLayout());
+        p1.add(back);
+        this.add(p1, BorderLayout.SOUTH);
 
         JButton deleteBtn = new JButton("Delete");
         textPanel.add(deleteBtn);
         deleteBtn.addActionListener(new DeleteItemActionListener());
         setVisible(true);
-
+        this.setLocationRelativeTo(null);
     }
     private class DeleteItemActionListener implements ActionListener {
         @Override
