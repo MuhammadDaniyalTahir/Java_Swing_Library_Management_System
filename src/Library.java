@@ -180,80 +180,40 @@ public class Library {
         }
     }
 
-    void addItem() throws IOException{
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter which item you want to add");
-        System.out.println("1: Book");
-        System.out.println("2: Magazine");
-        System.out.println("3: Newspaper");
-        int choice = sc.nextInt();
-        sc.nextLine();
+    void addItem(final int choice, final String[] data) throws IOException{
         FileWriter fileWriter = new FileWriter("data.txt", true);
         Random rand = new Random();
         int popularityCount = rand.nextInt(4);
 
         if(choice == 1){
-            System.out.println("Enter title of the book: ");
-            String title = sc.nextLine();
-            System.out.println("Enter name of author of the book: ");
-            String author = sc.nextLine();
-            System.out.println("Enter published year of the book: ");
-            int year = sc.nextInt();
-            System.out.println("Enter cost of the Book: ");
-            Double cost = sc.nextDouble();
-
-
-
-            fileWriter.write(1 + "," + title + "," + author + "," + year + "," + ++popularityCount + "," + cost + "\n");
+            fileWriter.write(1 + "," + data[0] + "," + data[1] + "," + data[2] + "," + ++popularityCount + "," + data[3] + "\n");
             fileWriter.close();
             System.out.println("Your book has been added Successfully");
-            items.add(new Book(title, author, year, cost, popularityCount));
+            items.add(new Book(data[0], data[1],Integer.parseInt(data[2]), Double.parseDouble(data[3]), popularityCount));
         }
         else if(choice == 2){
-            System.out.println("Enter title of the Magazine: ");
-            String title = sc.nextLine();
-            System.out.println("Enter name of publisher company");
-            String company = sc.nextLine();
-            int option = 0;
-            List authors = new ArrayList<String>();
-            do{
-                System.out.println("Enter the name of author: ");
-                authors.add(sc.nextLine());
-                System.out.println("Is there another author of the magazine");
-                System.out.println("1: yes");
-                System.out.println("2: No");
-                option = sc.nextInt();
-                sc.nextLine();
-            }while(option == 1);
-
-            System.out.println("Enter the cost of magazine: ");
-            Double cost = sc.nextDouble();
-
-            fileWriter.write(2 + "," + title + ",");
+            String[] authorStr = data[1].split(",");
+            List<String> authors = new ArrayList<>();
+            for(String s : authorStr)
+                authors.add(s);
+            fileWriter.write(2 + "," + data[0] + ",");
             for(int i = 0; i < authors.size(); i++){
                 fileWriter.write(authors.get(i).toString());
                 if(i+1 != authors.size()){
                     fileWriter.write(",");
                 }
             }
-            fileWriter.write(".," + company + "," + ++popularityCount + "," + cost + "\n");
+            fileWriter.write(".," + data[2] + "," + ++popularityCount + "," + data[3] + "\n");
             fileWriter.close();
-            items.add(new Magazine(title, authors, company, popularityCount, cost));
-
-
-
+            items.add(new Magazine(data[0], authors, data[2], popularityCount, Double.parseDouble(data[3])));
         }
         else if(choice == 3){
-            System.out.println("Enter title of the Newspaper: ");
-            String title = sc.nextLine();
-            System.out.println("Enter name of publisher company");
-            String publisher = sc.nextLine();
             LocalDate Date = LocalDate.now();
 
-            fileWriter.write(3 + "," + title + "," + publisher + "," + ++popularityCount + "," + Date.toString() + "\n");
+            fileWriter.write(3 + "," + data[0] + "," + data[1] + "," + ++popularityCount + "," + Date.toString() + "\n");
             fileWriter.close();
 
-            items.add(new Newspaper(title, publisher, popularityCount, Date.toString()));
+            items.add(new Newspaper(data[0], data[1], popularityCount, Date.toString()));
         }
 
 
