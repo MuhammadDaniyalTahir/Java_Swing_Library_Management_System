@@ -10,9 +10,9 @@ public class EditMagazineDialog extends JDialog {
     private JLabel titleLabel, costLabel, authorLabel, publisherLabel;
     private JLabel msgLabel;
     private JTextField inputTitle, inputAuthor, inputPublisher, inputCost;
-
-
-    public EditMagazineDialog(final Library lib, final int id, JLabel msgLabel){
+    private Item item;
+    public EditMagazineDialog(final Library lib, final int id, JLabel msgLabel, Item item){
+        this.item = item;
         this.msgLabel = msgLabel;
         this.lib =  lib;
         this.magazineID = id;
@@ -103,7 +103,7 @@ public class EditMagazineDialog extends JDialog {
         for(int i = 0; i < data.length; i++)
             data[i] = data[i].trim();
         try{
-            lib.editItem(this.magazineID, data);
+            lib.editItem(this.item, data);
         }
         catch(IOException e){
 

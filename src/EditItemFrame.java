@@ -63,20 +63,22 @@ public class EditItemFrame extends JFrame {
         int id = Integer.parseInt(this.inputID.getText());
         List<Item> items = this.lib.getItems();
         int typeId = 0;
+        Item item = null;
         for(Item i : items){
             if(i.getId() == id){
                 typeId = i.getTypeId();
+                item = i;
                 break;
             }
         }
         if(typeId == 1){
-            EditBookDialog dialog = new EditBookDialog(this.lib, id, msgLabel);
+            EditBookDialog dialog = new EditBookDialog(this.lib, id, msgLabel, item);
         }
         else if(typeId == 2){
-            EditMagazineDialog dialog = new EditMagazineDialog(this.lib, id, msgLabel);
+            EditMagazineDialog dialog = new EditMagazineDialog(this.lib, id, msgLabel, item);
         }
         else if(typeId == 3){
-            EditNewspaperDialog dialog = new EditNewspaperDialog(this.lib, id, msgLabel);
+            EditNewspaperDialog dialog = new EditNewspaperDialog(this.lib, id, msgLabel, item);
         }
         else{
             msgLabel.setText("");

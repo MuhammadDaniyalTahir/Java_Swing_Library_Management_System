@@ -1,7 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.TableColumn;
-import java.awt.Container;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -19,6 +18,7 @@ public class Menu extends JFrame {
     private JButton viewItemsByIDBtn;
     private JButton viewBorrowersListBtn;
     private JButton exitBtn;
+    private JButton viewPopularityBtn;
 
     public Menu(){
         Library lib = null;
@@ -36,11 +36,13 @@ public class Menu extends JFrame {
         this.viewAllItemsBtn = new JButton("View all Items");
         this.viewItemsByIDBtn = new JButton("View Item by ID");
         this.viewBorrowersListBtn = new JButton("View Borrowers List");
+        this.viewPopularityBtn = new JButton("View Popularity");
         this.exitBtn = new JButton("Exit");
+
 
         //Creating JFrame and adding all buttons into it.
         Container c = this.getContentPane();
-        JPanel p1 = new JPanel(new GridLayout(9,1));
+        JPanel p1 = new JPanel(new GridLayout(10,1));
         c.add(p1);
         p1.add(this.hotPicksBtn);
         p1.add(this.BorrowItemBtn);
@@ -50,6 +52,7 @@ public class Menu extends JFrame {
         p1.add(this.viewAllItemsBtn);
         p1.add(this.viewItemsByIDBtn);
         p1.add(this.viewBorrowersListBtn);
+        p1.add(this.viewPopularityBtn);
         p1.add(this.exitBtn);
         this.setSize(400, 400);
         this.setVisible(true);
@@ -65,6 +68,7 @@ public class Menu extends JFrame {
         this.viewAllItemsBtn.addActionListener(new ViewAllItemActionsListener(lib));
         this.addItemBtn.addActionListener(new AddItemActionListener(lib));
         this.editItemBtn.addActionListener(new EditItemActionListener(lib));
+        this.viewPopularityBtn.addActionListener(new ViewPopularityActionListener(lib));
         this.exitBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -155,5 +159,32 @@ public class Menu extends JFrame {
             EditItemFrame frame = new EditItemFrame(this.lib);
         }
     }
+    private class ViewPopularityActionListener implements ActionListener{
+        private Library lib;
+        public ViewPopularityActionListener(final Library lib){
+            this.lib = lib;
+        }
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            PieChart p = new PieChart(this.lib.getItems());
+            JFrame frame = new JFrame("Pie Chart Example");
+            frame.setSize(600, 600);
+            frame.setLocationRelativeTo(null);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add(p);
+            JButton backBtn = new JButton("Back");
+            backBtn.addActionListener(
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            frame.dispose();
+                        }
+                    }
+            );
+            frame.add(backBtn, BorderLayout.SOUTH);
+            frame.setVisible(true);
+        }
+    }
+
 
 }

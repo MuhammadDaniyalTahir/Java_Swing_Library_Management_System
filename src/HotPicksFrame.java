@@ -27,7 +27,7 @@ public class HotPicksFrame extends JFrame {
 
         JTable table = new JTable(model) {
             @Override
-            public Class getColumnClass(int column) {
+            public Class getColumnClass(final int column) {
                 return column == 8 ? JButton.class : Object.class; // Set column 8 to render buttons
             }
         };
@@ -79,21 +79,19 @@ public class HotPicksFrame extends JFrame {
             if(i.getTypeId() == 1){ // now add data if item is book.
                 Book b = (Book)i; // Downcasting from item to book.
                 model.addRow(new Object[]{"Book", b.getTitle(), b.getAuthor(), "Nill", b.getPublishedYear(),
-                        b.getPopularityCount(), b.getCost(), "Nill", createButton()});
+                        b.getPopularityCount(), b.getCost(), "Nill", createButton(b)});
             }
             else if(i.getTypeId() == 2){ // now add data if item is Magazine.
                 Magazine m = (Magazine)i;// Downcasting from item to book.
                 model.addRow(new Object[]{"Magazine", m.getTitle(), m.getAuthor(), m.getPublisher(), "Nill",
-                m.getPopularityCount(), m.getCost(), "Nill", createButton()});
+                m.getPopularityCount(), m.getCost(), "Nill", createButton(m)});
             }
             else { // now add data if item is Newspaper.
                 Newspaper n = (Newspaper)i; //Downcasting from item to newspaper.
                 model.addRow(new Object[]{"Newspaper", n.getTitle(), "Nill", n.getPublisher(), "Nill", n.popularityCount,
-                "Nill", n.getPublicationData(), createButton()});
+                "Nill", n.getPublicationData(), createButton(n)});
             }
         }
-
-
 
         table.getColumnModel().getColumn(8).setCellRenderer(new ButtonRenderer());
 
@@ -101,7 +99,6 @@ public class HotPicksFrame extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane(table);
 
-        //JFrame frame = new JFrame("JTable with Button Example");
         this.setTitle("HotPicksItems");
 //        this.addWindowListener(    //Code to close the JFrame.
 //                new WindowAdapter() {
@@ -136,13 +133,13 @@ public class HotPicksFrame extends JFrame {
         this.setLocationRelativeTo(null);
 
     }
-    private static JButton createButton() {
+    private static JButton createButton(final Item item) {
         JButton button = new JButton("Read");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //JOptionPane.showMessageDialog(null, "Click Function!");
-                System.out.println("Function");
+                ReadItemFrame read = new ReadItemFrame(item.getTitle()+".txt");
+
             }
         });
         return button;

@@ -10,8 +10,10 @@ public class EditBookDialog extends JDialog {
     private JLabel titleLabel, costLabel, authorLabel, yearLabel;
     private JLabel msgLabel;
     private JTextField inputTitle, inputAuthor, inputYear, inputCost;
+    private Item item;
 
-    public EditBookDialog(final Library lib, final int id, JLabel msgLabel){
+    public EditBookDialog(final Library lib, final int id, JLabel msgLabel, Item item){
+        this.item = item;
         this.msgLabel = msgLabel;
         this.lib =  lib;
         this.bookID = id;
@@ -101,8 +103,10 @@ public class EditBookDialog extends JDialog {
         String[] data = {inputTitle.getText(), inputAuthor.getText(), inputYear.getText(), inputCost.getText()};
         for(int i = 0; i < data.length; i++)
             data[i] = data[i].trim();
+
         try{
-            lib.editItem(this.bookID, data);
+            //for(int i = 0; i < )
+            lib.editItem(this.item, data);
         }
         catch(IOException e){
 

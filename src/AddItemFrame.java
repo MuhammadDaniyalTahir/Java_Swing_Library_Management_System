@@ -75,7 +75,7 @@ public class AddItemFrame extends JFrame {
     private void addItemBtnFunction(){
         if(this.addBook.isSelected()){
             AddBookDialog dialog = new AddBookDialog(this.lib);
-            msgLabel.setText("Book has been added successfully");
+
         }
         else if(this.addMagazine.isSelected()){
             AddMagazineDialog dialog = new AddMagazineDialog(this.lib);

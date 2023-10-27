@@ -1,3 +1,4 @@
+import java.io.FileReader;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
@@ -184,12 +185,13 @@ public class Library {
         FileWriter fileWriter = new FileWriter("data.txt", true);
         Random rand = new Random();
         int popularityCount = rand.nextInt(4);
+        Item it = null;
 
         if(choice == 1){
             fileWriter.write(1 + "," + data[0] + "," + data[1] + "," + data[2] + "," + ++popularityCount + "," + data[3] + "\n");
             fileWriter.close();
-            System.out.println("Your book has been added Successfully");
-            items.add(new Book(data[0], data[1],Integer.parseInt(data[2]), Double.parseDouble(data[3]), popularityCount));
+            it = new Book(data[0], data[1],Integer.parseInt(data[2]), Double.parseDouble(data[3]), popularityCount);
+            items.add(it);
         }
         else if(choice == 2){
             String[] authorStr = data[1].split(",");
@@ -205,7 +207,8 @@ public class Library {
             }
             fileWriter.write(".," + data[2] + "," + ++popularityCount + "," + data[3] + "\n");
             fileWriter.close();
-            items.add(new Magazine(data[0], authors, data[2], popularityCount, Double.parseDouble(data[3])));
+            it = new Magazine(data[0], authors, data[2], popularityCount, Double.parseDouble(data[3]));
+            items.add(it);
         }
         else if(choice == 3){
             LocalDate Date = LocalDate.now();
@@ -213,38 +216,51 @@ public class Library {
             fileWriter.write(3 + "," + data[0] + "," + data[1] + "," + ++popularityCount + "," + Date.toString() + "\n");
             fileWriter.close();
 
-            items.add(new Newspaper(data[0], data[1], popularityCount, Date.toString()));
+            it = new Newspaper(data[0], data[1], popularityCount, Date.toString());
+            items.add(it);
         }
+        makeFileToreadItem(it);
+    }
+    private void makeFileToreadItem(final Item item)throws IOException{
+        String fileName = item.getTitle()+".txt";
+        File file = new File(fileName);
+        FileWriter writer = new FileWriter(fileName);
 
+        writer.write("Title: " + item.getTitle() + "\n");
 
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        int length = 10;
+        StringBuilder randomString = new StringBuilder(length);
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(characters.length());
+            char randomChar = characters.charAt(randomIndex);
+            randomString.append(randomChar);
+        }
+        writer.write(randomString.toString());
+        writer.close();
     }
 
     void displayInfo(final Item i){
         i.displayInfo();
     }
 
-    void editItem(final int id, final String[] data)throws IOException{
-        for(Item i : items){
-            if(i.getId() == id){
-
-                if(i.getTypeId() == 1){
-                    this.editBook(i, data);
-                    break;
-                }
-                else if(i.getTypeId() == 2){
-                    this.editMagazine(i, data);
-                    break;
-                }
-                else if(i.getTypeId() == 3){
-                    this.editNewspaper(i, data);
-                    break;
-                }
-            }
+    void editItem(Item item, final String[] data)throws IOException{
+        this.updateTextFile(item, data[0]);
+        if(item.getTypeId() == 1){
+            this.editBook(item, data);
+        }
+        else if(item.getTypeId() == 2){
+            this.editMagazine(item, data);
+        }
+        else if(item.getTypeId() == 3){
+            this.editNewspaper(item, data);
         }
         FileWriter fw = new FileWriter("data.txt");
-        fw.close();
+        fw.close(); //To make the data.txt file empty.
         for(Item i : items){
-            i.writeToFile();
+            i.writeToFile(); //to write the updated data into data.txt.
         }
     }
 
@@ -270,6 +286,33 @@ public class Library {
     void editNewspaper(Item i, final String[] data){
             i.setTitle(data[0]);
             i.setPublisher(data[1]);
+    }
+
+    private void updateTextFile(Item item, final String updatedTitle)throws IOException{
+        File file = new File(item.getTitle()+".txt");
+        File newFile = new File(updatedTitle+".txt");
+        file.renameTo(newFile);//name of the file has been changed.
+        newFile = null;
+
+        //Code to read the data of file.
+        FileReader read = new FileReader(updatedTitle+".txt");
+        Scanner sc = new Scanner(read);
+        String fileData = "";
+        sc.nextLine();
+        sc.nextLine();//to skip to read the title.
+        while(sc.hasNext()){
+            fileData += sc.nextLine() + "\n";
+        }
+        sc = null;
+        read.close();
+
+        //Code to write the updated title of file into file.
+        FileWriter write = new FileWriter(updatedTitle+".txt");
+        write.write("Title: " + updatedTitle + "\n\n" + fileData);
+        write.close();
+
+
+
     }
 
     boolean deleteItem(final int id) throws IOException{

@@ -10,8 +10,10 @@ public class EditNewspaperDialog extends JDialog {
     private JLabel msgLabel;
     private JTextField inputTitle, inputPublisher;
     private int newspaperID;
+    private Item item;
 
-    public EditNewspaperDialog(final Library lib, final int id, JLabel msgLabel){
+    public EditNewspaperDialog(final Library lib, final int id, JLabel msgLabel, Item item){
+        this.item = item;
         this.msgLabel = msgLabel;
         this.lib =  lib;
         this.newspaperID = id;
@@ -86,7 +88,7 @@ public class EditNewspaperDialog extends JDialog {
         for(int i = 0; i < data.length; i++)
             data[i] = data[i].trim();
         try{
-            lib.editItem(this.newspaperID, data);
+            lib.editItem(this.item, data);
         }
         catch(IOException e){
 
