@@ -21,6 +21,7 @@ public class EditBookDialog extends JDialog {
         this.setVisible(true);
         this.setLayout(new GridLayout(5, 1));
         this.setLocationRelativeTo(null);
+        this.setTitle("Enter Book Details");
 
         //Making all labels that we need in this dialog box.
         titleLabel = new JLabel("Enter Title");

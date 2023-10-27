@@ -16,7 +16,7 @@ public class ViewItemByIDFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("View Item By ID");
 
-        this.setSize(500, 500);
+        this.setSize(800, 600);
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
 
@@ -49,13 +49,12 @@ public class ViewItemByIDFrame extends JFrame {
         this.add(p1, BorderLayout.SOUTH);
 
     }
-    private static JButton createButton() {
+    private static JButton createButton(final Item item) {
         JButton button = new JButton("Read");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //JOptionPane.showMessageDialog(null, "Click Function!");
-                System.out.println("Function");
+                ReadItemFrame read = new ReadItemFrame(item.getTitle()+".txt");
             }
         });
         return button;
@@ -68,13 +67,13 @@ public class ViewItemByIDFrame extends JFrame {
 
             int ID = Integer.parseInt(t1.getText().toString());
             t1.setText("");
-            Item i = lib.getItemById(ID);
+            Item item = lib.getItemById(ID);
 
 
             model.addColumn("Item");
             model.addColumn("Title");
-            if(i.getTypeId() == 1){ // now add data if item is book.
-                Book b = (Book)i; // Downcasting from item to book.
+            if(item.getTypeId() == 1){ // now add data if item is book.
+                Book b = (Book)item; // Downcasting from item to book.
 
 
 
@@ -84,26 +83,26 @@ public class ViewItemByIDFrame extends JFrame {
                 model.addColumn("Cost");
                 model.addColumn("Read");
                 model.addRow(new Object[]{"Book", b.getTitle(), b.getAuthor(), b.getPublishedYear(),
-                        b.getPopularityCount(), b.getCost(), createButton()});
+                        b.getPopularityCount(), b.getCost(), createButton(item)});
             }
-            else if(i.getTypeId() == 2){ // now add data if item is Magazine.
-                Magazine m = (Magazine)i;// Downcasting from item to book.
+            else if(item.getTypeId() == 2){ // now add data if item is Magazine.
+                Magazine m = (Magazine)item;// Downcasting from item to book.
                 model.addColumn("Author(s)");
                 model.addColumn("Publisher");
                 model.addColumn("Popularity");
                 model.addColumn("Cost");
                 model.addColumn("Read");
                 model.addRow(new Object[]{"Magazine", m.getTitle(), m.getAuthor(), m.getPublisher(),
-                        m.getPopularityCount(), m.getCost(), createButton()});
+                        m.getPopularityCount(), m.getCost(), createButton(item)});
             }
             else { // now add data if item is Newspaper.
-                Newspaper n = (Newspaper)i; //Downcasting from item to newspaper.
+                Newspaper n = (Newspaper)item; //Downcasting from item to newspaper.
                 model.addColumn("Publisher");
                 model.addColumn("Popularity");
                 model.addColumn("Publication Date");
                 model.addColumn("Read");
                 model.addRow(new Object[]{"Newspaper", n.getTitle(),n.getPublisher(), n.popularityCount,
-                        n.getPublicationData(), createButton()});
+                        n.getPublicationData(), createButton(item)});
             }
             if (table != null) {
                 ViewItemByIDFrame.this.remove(table);

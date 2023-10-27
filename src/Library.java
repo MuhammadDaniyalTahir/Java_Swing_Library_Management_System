@@ -129,7 +129,6 @@ public class Library {
                         else if(countComma+1 == 5){
                             countComma++;
                             popularityCount = Integer.parseInt(str);
-                            // System.out.println(popularityCount);
                             str = "";
                             i++;
                         }
@@ -168,7 +167,6 @@ public class Library {
 
                             countComma++;
                             popularityCount = Integer.parseInt(str);
-                            //System.out.println(popularityCount);
                             str = "";
                             i++;
                         }
@@ -177,7 +175,6 @@ public class Library {
                 }
                 items.add(new Newspaper(title, publisher, popularityCount, date));
             }
-            //System.out.println(popularityCount);
         }
     }
 
@@ -195,6 +192,9 @@ public class Library {
         }
         else if(choice == 2){
             String[] authorStr = data[1].split(",");
+            for(int i = 0; i < authorStr.length; i++){
+                authorStr[i] = authorStr[i].trim();
+            }
             List<String> authors = new ArrayList<>();
             for(String s : authorStr)
                 authors.add(s);
@@ -273,6 +273,8 @@ public class Library {
 
     void editMagazine(Item i, final String[] data){
         String[] authorStr = data[1].split(",");
+        for(int j = 0; j < authorStr.length; j++)
+            authorStr[j] = authorStr[j].trim();
         List<String> authors = new ArrayList<>();
         for(String s : authorStr)
             authors.add(s);

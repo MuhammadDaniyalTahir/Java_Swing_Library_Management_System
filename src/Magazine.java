@@ -20,6 +20,7 @@ class Magazine extends Item{
         for(int i = 0; i < authors.size(); i++){
             this.authors.add(authors.get(i));
         }
+        System.out.println("\n");
         this.isBorrowed = false;
         this.borrowers = new ArrayList<Borrower>();
     }
@@ -76,10 +77,11 @@ class Magazine extends Item{
     String getAuthor(){ // to use in hot picks frame.
         String authorsStr = "";
         for(int i = 0; i < authors.size(); i++){
-            authorsStr.concat(this.authors.get(i)+"");
+            authorsStr += this.authors.get(i);
             if(i+1 < authors.size())
-                authorsStr.concat(", ");
+                authorsStr += ", ";
         }
+        System.out.println("Authors = " + authorsStr);
         return authorsStr;
     }
     @Override
