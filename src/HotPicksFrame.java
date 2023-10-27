@@ -14,7 +14,12 @@ public class HotPicksFrame extends JFrame {
     private Library lib;
     public HotPicksFrame(final Library lib){
         List<Item> items = lib.getHotPicks();
-        DefaultTableModel model = new DefaultTableModel(); //Making dynamic table model.
+        DefaultTableModel model = new DefaultTableModel(){ //Making dynamic table model.
+            @Override
+            public boolean isCellEditable(int row, int col){ //making the model non-editable.
+                return false;
+            }
+        };
         model.addColumn("Item");
         model.addColumn("Title");
         model.addColumn("Author(s)");

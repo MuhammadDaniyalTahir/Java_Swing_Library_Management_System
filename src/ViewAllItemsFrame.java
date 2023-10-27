@@ -12,7 +12,12 @@ public class ViewAllItemsFrame extends JFrame {
     private static int hoveredRow = -1;
     public ViewAllItemsFrame(final Library lib) {
         List<Item> items = lib.getItems();
-        DefaultTableModel model = new DefaultTableModel(); //Making dynamic table model.
+        DefaultTableModel model = new DefaultTableModel(){ //Making dynamic table model.
+            @Override
+            public boolean isCellEditable(int row, int col){ //making the model non-editable.
+                return false;
+            }
+        };
         model.addColumn("Item");
         model.addColumn("Title");
         model.addColumn("Author(s)");
@@ -22,6 +27,7 @@ public class ViewAllItemsFrame extends JFrame {
         model.addColumn("Cost");
         model.addColumn("Publication_Date");
         model.addColumn("Read");
+
 
         JTable table = new JTable(model) {
             @Override

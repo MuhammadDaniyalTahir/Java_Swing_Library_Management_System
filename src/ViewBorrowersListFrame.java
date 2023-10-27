@@ -8,7 +8,12 @@ import java.util.List;
 public class ViewBorrowersListFrame extends JFrame {
     private static int hoveredRow = -1;
     public ViewBorrowersListFrame(final Library lib){
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel(){ //Making dynamic table model.
+            @Override
+            public boolean isCellEditable(int row, int col){ //making the model non-editable.
+                return false;
+            }
+        };
 
         this.setTitle("View Borrowers of each item Borrowed");
         this.setLayout(new BorderLayout());

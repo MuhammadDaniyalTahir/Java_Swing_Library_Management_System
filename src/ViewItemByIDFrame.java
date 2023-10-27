@@ -12,7 +12,12 @@ public class ViewItemByIDFrame extends JFrame {
     private JTable table = null;
     ViewItemByIDFrame(final Library lib){
         this.lib = lib;
-        model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel(){ //Making dynamic table model.
+            @Override
+            public boolean isCellEditable(int row, int col){ //making the model non-editable.
+                return false;
+            }
+        };
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("View Item By ID");
 
