@@ -15,10 +15,14 @@ public class ViewAllItemsFrame extends JFrame {
         DefaultTableModel model = new DefaultTableModel(){ //Making dynamic table model.
             @Override
             public boolean isCellEditable(int row, int col){ //making the model non-editable.
+                if(col == 9)
+                    return true;
                 return false;
             }
         };
+        //DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Item");
+        model.addColumn("ID");
         model.addColumn("Title");
         model.addColumn("Author(s)");
         model.addColumn("Publisher_Company");
@@ -32,7 +36,7 @@ public class ViewAllItemsFrame extends JFrame {
         JTable table = new JTable(model) {
             @Override
             public Class getColumnClass(int column) {
-                return column == 8 ? JButton.class : Object.class; // Set column 8 to render buttons
+                return column == 9 ? JButton.class : Object.class; // Set column 8 to render buttons
             }
         };
         //Following code to add mouse hovering in the table.
@@ -81,23 +85,23 @@ public class ViewAllItemsFrame extends JFrame {
         for (Item i : items) {
             if (i.getTypeId() == 1) { // now add data if item is book.
                 Book b = (Book) i; // Downcasting from item to book.
-                model.addRow(new Object[]{"Book", b.getTitle(), b.getAuthor(), "Nill", b.getPublishedYear(),
+                model.addRow(new Object[]{"Book", b.getId(), b.getTitle(), b.getAuthor(), "Nill", b.getPublishedYear(),
                         b.getPopularityCount(), b.getCost(), "Nill", createButton(b)});
             } else if (i.getTypeId() == 2) { // now add data if item is Magazine.
                 Magazine m = (Magazine) i;// Downcasting from item to book.
-                model.addRow(new Object[]{"Magazine", m.getTitle(), m.getAuthor(), m.getPublisher(), "Nill",
+                model.addRow(new Object[]{"Magazine", m.getId(), m.getTitle(), m.getAuthor(), m.getPublisher(), "Nill",
                         m.getPopularityCount(), m.getCost(), "Nill", createButton(m)});
             } else { // now add data if item is Newspaper.
                 Newspaper n = (Newspaper) i; //Downcasting from item to newspaper.
-                model.addRow(new Object[]{"Newspaper", n.getTitle(), "Nill", n.getPublisher(), "Nill", n.popularityCount,
+                model.addRow(new Object[]{"Newspaper", n.getId(), n.getTitle(), "Nill", n.getPublisher(), "Nill", n.popularityCount,
                         "Nill", n.getPublicationData(), createButton(n)});
             }
         }
 
 
-        table.getColumnModel().getColumn(8).setCellRenderer(new ButtonRenderer());
+        table.getColumnModel().getColumn(table.getColumnCount() - 1).setCellRenderer(new ButtonRenderer());
 
-        table.getColumnModel().getColumn(8).setCellEditor(new ButtonEditor());
+        table.getColumnModel().getColumn(table.getColumnCount() - 1).setCellEditor(new ButtonEditor());
 
         JScrollPane scrollPane = new JScrollPane(table);
         this.setTitle("View All Items");

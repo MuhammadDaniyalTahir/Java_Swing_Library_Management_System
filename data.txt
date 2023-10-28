@@ -1,14 +1,12 @@
-1,Book1Edited,Author1,2016,12,120.0
-1,Book2Title,author2,2020,11,125.0
-2,EditedMagazineTitle,author1,author2.,publisherEdited,10,105.0
-3,EditedNewspaperTitle,newPublisher,12,2023-09-23
-2,newMagazineTitle,author1,author2,author3.,MagazinePubisher,12,105.0
-2,magazine3_title,author3.,publisher3,11,90.0
-3,newspaper3_title,publisher3,10,2023-09-23
-1,EditedBookTitle,author1,2021,12,95.0
-3,newspaper4_title,publisher4,11,2023-09-23
-3,Gui Newspaper,Publisher,10,2023-10-22
-1,BookTitleFile,authorFile,2019,6,130.0
-1,BookFileTitle,authorFile,2019,8,130.0
-3,NewspaperFileTitle,publisher,5,2023-10-24
-2,magazineTitleNew,author1,author2,authorrr.,publisher,4,97.0
+1,Book1Edited,Author1,2016,14,120.0
+2,EditedMagazineTitle,author1,author2.,publisherEdited,12,105.0
+3,EditedNewspaperTitle,newPublisher,14,2023-09-23
+2,newMagazineTitle,author1,author2,author3.,MagazinePubisher,14,105.0
+3,newspaper3_title,publisher3,12,2023-09-23
+1,EditedBookTitle,author1,2021,14,95.0
+3,newspaper4_title,publisher4,13,2023-09-23
+3,Gui Newspaper,Publisher,12,2023-10-22
+1,BookTitleFile,authorFile,2019,8,130.0
+1,BookFileTitle,authorFile,2019,10,130.0
+3,NewspaperFileTitle,publisher,7,2023-10-24
+2,magazineTitleNew,author1,author2,authorrr.,publisher,6,97.0

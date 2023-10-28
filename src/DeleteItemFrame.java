@@ -10,6 +10,7 @@ public class DeleteItemFrame extends JFrame {
     private JTextField t1 = null;
     private JTable table = null;
     public DeleteItemFrame(final Library lib){
+        this.lib = lib;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500, 300);
         this.setLayout(new BorderLayout());
@@ -45,15 +46,8 @@ public class DeleteItemFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent ae){
             int ID = Integer.parseInt(t1.getText().toString());
-            Library lib = null;
-            try{
-                lib = new Library();
-            }
-            catch (IOException e){
-
-            }
             JLabel result = new JLabel();
-            boolean flag = true;
+            boolean flag = false;
             try{
                 flag = lib.deleteItem(ID);
             }
@@ -62,7 +56,7 @@ public class DeleteItemFrame extends JFrame {
                 return;
             }
 
-            if(flag)
+            if(flag == true)
                 result.setText("Item has been deleted successfully");
             else
                 result.setText("Item not found");

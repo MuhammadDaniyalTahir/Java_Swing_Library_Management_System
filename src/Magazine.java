@@ -81,7 +81,6 @@ class Magazine extends Item{
             if(i+1 < authors.size())
                 authorsStr += ", ";
         }
-        System.out.println("Authors = " + authorsStr);
         return authorsStr;
     }
     @Override

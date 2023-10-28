@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="5195679c-05a7-4b87-aaed-2d1ea088bfd1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AddNewspaperDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddNewspaperDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/magazine3_title.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BorrowItemFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BorrowItemFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DeleteItemFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DeleteItemFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/HotPicksFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HotPicksFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Library.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Library.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Magazine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Magazine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ViewAllItemsFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ViewAllItemsFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ViewBorrowersListFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ViewBorrowersListFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ViewItemByIDFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ViewItemByIDFrame.java" afterDir="false" />
@@ -181,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698412411491</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="I have made the Tables non-editable.">
+      <option name="closed" value="true" />
+      <created>1698413114259</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1698413114259</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -210,7 +222,8 @@
     <MESSAGE value="Going back buttons from a screen are added to some frames." />
     <MESSAGE value="Functionality of read item has been implemented." />
     <MESSAGE value="Functionality of view popularity of items has been implemented." />
-    <option name="LAST_COMMIT_MESSAGE" value="Functionality of view popularity of items has been implemented." />
+    <MESSAGE value="I have made the Tables non-editable." />
+    <option name="LAST_COMMIT_MESSAGE" value="I have made the Tables non-editable." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -223,6 +236,11 @@
           <properties class="java.lang.NumberFormatException" package="java.lang" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Library.java</url>
+          <line>320</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

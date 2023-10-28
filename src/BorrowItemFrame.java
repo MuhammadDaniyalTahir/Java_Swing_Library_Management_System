@@ -23,7 +23,14 @@ public class BorrowItemFrame extends JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
 
-        model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel(){ //Making dynamic table model.
+            @Override
+            public boolean isCellEditable(int row, int col){ //making the model non-editable.
+                if(col == 9)
+                    return true;
+                return false;
+            }
+        };
         table = new JTable(model);
 
         JScrollPane scrollPane = new JScrollPane(table);
@@ -81,6 +88,7 @@ public class BorrowItemFrame extends JFrame {
         subInputPanel.add(BorrowBtn);
 
         model.addColumn("Item");
+        model.addColumn("ID");
         model.addColumn("Title");
         model.addColumn("Author(s)");
         model.addColumn("Publisher_Company");
@@ -139,22 +147,22 @@ public class BorrowItemFrame extends JFrame {
         for(Item i : items){
             if(i.getTypeId() == 1){ // now add data if item is book.
                 Book b = (Book)i; // Downcasting from item to book.
-                model.addRow(new Object[]{"Book", b.getTitle(), b.getAuthor(), "Nill", b.getPublishedYear(),
+                model.addRow(new Object[]{"Book", b.getId(), b.getTitle(), b.getAuthor(), "Nill", b.getPublishedYear(),
                         b.getPopularityCount(), b.getCost(), "Nill", createButton(b)});
             }
             else if(i.getTypeId() == 2){ // now add data if item is Magazine.
                 Magazine m = (Magazine)i;// Downcasting from item to book.
-                model.addRow(new Object[]{"Magazine", m.getTitle(), m.getAuthor(), m.getPublisher(), "Nill",
+                model.addRow(new Object[]{"Magazine", m.getId(), m.getTitle(), m.getAuthor(), m.getPublisher(), "Nill",
                         m.getPopularityCount(), m.getCost(), "Nill", createButton(m)});
             }
             else { // now add data if item is Newspaper.
                 Newspaper n = (Newspaper)i; //Downcasting from item to newspaper.
-                model.addRow(new Object[]{"Newspaper", n.getTitle(), "Nill", n.getPublisher(), "Nill", n.popularityCount,
+                model.addRow(new Object[]{"Newspaper", n.getId(), n.getTitle(), "Nill", n.getPublisher(), "Nill", n.popularityCount,
                         "Nill", n.getPublicationData(), createButton(n)});
             }
         }
-        table.getColumnModel().getColumn(8).setCellRenderer(new ButtonRenderer());
-        table.getColumnModel().getColumn(8).setCellEditor(new ButtonEditor());
+        table.getColumnModel().getColumn(table.getColumnCount() - 1).setCellRenderer(new ButtonRenderer());
+        table.getColumnModel().getColumn(table.getColumnCount() - 1).setCellEditor(new ButtonEditor());
 
     }
     private static JButton createButton(final Item item) {

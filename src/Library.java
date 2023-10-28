@@ -321,6 +321,7 @@ public class Library {
         boolean flag = false;
         for(Item i : items){
             if(i.getId() == id){
+                removeItemFile(i);
                 items.remove(i);
                 flag = true;
                 break;
@@ -334,6 +335,10 @@ public class Library {
             i.writeToFile();
         }
         return flag;
+    }
+    public void removeItemFile(final Item item){
+        File file = new File(item.getTitle()+".txt");
+        file.delete();
     }
 
     void displayAllItems(){

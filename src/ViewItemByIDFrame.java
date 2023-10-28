@@ -15,6 +15,8 @@ public class ViewItemByIDFrame extends JFrame {
         DefaultTableModel model = new DefaultTableModel(){ //Making dynamic table model.
             @Override
             public boolean isCellEditable(int row, int col){ //making the model non-editable.
+                if(col == 9)
+                    return true;
                 return false;
             }
         };
@@ -76,6 +78,7 @@ public class ViewItemByIDFrame extends JFrame {
 
 
             model.addColumn("Item");
+            model.addColumn("ID");
             model.addColumn("Title");
             if(item.getTypeId() == 1){ // now add data if item is book.
                 Book b = (Book)item; // Downcasting from item to book.
@@ -87,7 +90,7 @@ public class ViewItemByIDFrame extends JFrame {
                 model.addColumn("Popularity");
                 model.addColumn("Cost");
                 model.addColumn("Read");
-                model.addRow(new Object[]{"Book", b.getTitle(), b.getAuthor(), b.getPublishedYear(),
+                model.addRow(new Object[]{"Book", b.getId(), b.getTitle(), b.getAuthor(), b.getPublishedYear(),
                         b.getPopularityCount(), b.getCost(), createButton(item)});
             }
             else if(item.getTypeId() == 2){ // now add data if item is Magazine.
@@ -97,7 +100,7 @@ public class ViewItemByIDFrame extends JFrame {
                 model.addColumn("Popularity");
                 model.addColumn("Cost");
                 model.addColumn("Read");
-                model.addRow(new Object[]{"Magazine", m.getTitle(), m.getAuthor(), m.getPublisher(),
+                model.addRow(new Object[]{"Magazine", m.getId(), m.getTitle(), m.getAuthor(), m.getPublisher(),
                         m.getPopularityCount(), m.getCost(), createButton(item)});
             }
             else { // now add data if item is Newspaper.
@@ -106,7 +109,7 @@ public class ViewItemByIDFrame extends JFrame {
                 model.addColumn("Popularity");
                 model.addColumn("Publication Date");
                 model.addColumn("Read");
-                model.addRow(new Object[]{"Newspaper", n.getTitle(),n.getPublisher(), n.popularityCount,
+                model.addRow(new Object[]{"Newspaper", n.getId(), n.getTitle(),n.getPublisher(), n.popularityCount,
                         n.getPublicationData(), createButton(item)});
             }
             if (table != null) {

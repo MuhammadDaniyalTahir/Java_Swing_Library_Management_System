@@ -11,6 +11,8 @@ public class ViewBorrowersListFrame extends JFrame {
         DefaultTableModel model = new DefaultTableModel(){ //Making dynamic table model.
             @Override
             public boolean isCellEditable(int row, int col){ //making the model non-editable.
+                if(col == 9)
+                    return true;
                 return false;
             }
         };
